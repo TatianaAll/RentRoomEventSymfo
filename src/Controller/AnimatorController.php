@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Animator;
 use App\Form\AnimatorType;
+use App\Repository\AnimatorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class AnimatorController extends AbstractController
 {
     #[Route(path: '/animator', name: 'animator')]
-    public function index(): Response
+    public function index(AnimatorRepository $animatorRepository): Response
     {
+        $animators = $animatorRepository->findAll();
+
         return $this->render('animator/index.html.twig', [
-            'controller_name' => 'AnimatorController',
+            'animators' => $animators,
         ]);
     }
 
