@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EtablishmentRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +23,9 @@ class Etablishment
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\OneToMany(mappedBy: 'etablishment', targetEntity: Room::class)]
+    private ?Collection $rooms = null;
 
     public function getId(): ?int
     {
@@ -62,5 +66,10 @@ class Etablishment
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getRooms() : Collection
+    {
+        return $this->rooms;
     }
 }

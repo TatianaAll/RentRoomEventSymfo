@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification de la salle {{ room.name}} {% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h2 class="text-primary h2">MOdification de la salle</h2>
+        {{ form_start(form_view) }}
+        {{ form_widget(form_view) }}
+        {{ form_end(form_view) }}
+    </section>
+    <section class="container mt-3">
+        <a href="{{ path('room') }}" class="btn btn-primary">Retourner à la vue des salles</a>
+    </section>
+
+{% endblock %}

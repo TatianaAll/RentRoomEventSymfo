@@ -23,6 +23,13 @@ class RoomController extends AbstractController
         ]);
     }
 
+    #[Route('/room/show/{id}', name: 'room_show')]
+    public function showRoom(int $id, RoomRepository $roomRepository): Response
+    {
+        $room = $roomRepository->find($id);
+        return $this->render('room/show.html.twig', ['room'=>$room]);
+    }
+
     #[Route(path:'/room/create', name: 'room_create')]
     public function createRoom(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -40,5 +47,29 @@ class RoomController extends AbstractController
             return $this->redirectToRoute('room');
         }
         return $this->render('room/create.html.twig', ['form_view'=>$form_view]);
+    }
+
+    #[Route(path:'/room/update/{id}', name: 'room_update', requirements: ['id'=>'\d+'])]
+    public function updateRoom(int $id,
+                               RoomRepository $roomRepository,
+                               Request $request,
+                               EntityManagerInterface $entityManager) : Response
+    {
+        $roomToUpdate = $roomRepository->find($id);
+
+        if (!$roomToUpdate) {
+            return $this->redirectToRoute('not_found');
+        }
+
+        $form = $this->createForm(RoomType::class, $roomToUpdate);
+        $formView=$form->createView();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $entityManager->persist($roomToUpdate);
+            $entityManager->flush();
+            return $this->redirectToRoute('room');
+        }
+        return $this->render('room/update.html.twig', ['form_view'=>$formView, 'room'=>$roomToUpdate]);
     }
 }

@@ -6,15 +6,23 @@
 
     <section class="container">
         <h2 class="text-primary h2">Les salles</h2>
-        <ul>
-            {% for room in rooms %}
-                <li class="fw-bold">{{ room.name }}
-                    <span class="fs-6 fw-normal"> de {{ room.capacity }} places.</span>
-                </li>
-            {% endfor %}
-        </ul>
 
-        <a href="{{ path('category_create') }}" class="btn btn-primary" >Ajouter une salle</a>
+        {% for room in rooms %}
+            <div class="card mt-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h3 class="card-title">{{ room.name }}</h3>
+                    <p class="card-text">Capacité de {{ room.capacity }} places</p>
+                    {% for tag in room.tags %}
+                        <p>{{ tag.name }}</p>
+                    {% endfor %}
+                    <a href="{{ path('room_show', {id: room.id}) }}" class="card-link">Voir la salle</a>
+                    <a href="{{ path('room_update', {id: room.id}) }}" class="card-link">Mettre à jour</a>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        <a href="{{ path('room_create') }}" class="btn btn-primary">Ajouter une salle</a>
     </section>
 
 {% endblock %}
