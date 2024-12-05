@@ -5,13 +5,13 @@
 {% block body %}
 
     <section class="container">
-        <h2 class="text-primary h2">Création d'un nouvel animateur</h2>
+        <h2 class="text-primary h2">Création d'un nouveau tag</h2>
         {{ form_start(form_view) }}
         {{ form_widget(form_view) }}
         {{ form_end(form_view) }}
     </section>
     <section class="container mt-3">
-        <a href="{{ path('animator') }}" class="btn btn-primary">Retourner à la vue des animateurs</a>
+        <a href="{{ path('tag') }}" class="btn btn-primary">Retourner à la vue des tag</a>
     </section>
 
 {% endblock %}

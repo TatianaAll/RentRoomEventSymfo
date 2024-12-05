@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tags{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h2 class="text-primary h2">Liste des Tags</h2>
+        <ul>
+            {% for tag in tags %}
+                <li>{{ tag.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('tag_create') }}" class="btn btn-primary" >Ajouter un nouveau tag</a>
+    </section>
+
+{% endblock %}
