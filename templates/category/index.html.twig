@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des animateurs{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h2 class="text-primary h2">Les catégories d'évènements proposés</h2>
+        <ul>
+            {% for category in categories %}
+                <li class="fs-5 fw-bold">{{ category.name }}
+                    <span class="fs-6 fw-normal"> {{ category.description }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('category_create') }}" class="btn btn-primary" >Ajouter une nouvelle catégorie</a>
+    </section>
+
+{% endblock %}
