@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des établissements{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h2 class="text-primary h2">Liste des établissement</h2>
+        <ul>
+            {% for etablishment in etablishments %}
+                <li>{{ etablishment.name }}, au {{ etablishment.address }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('etablishment_create') }}" class="btn btn-primary">Ajouter un nouvel établissement</a>
+    </section>
+
+{% endblock %}
+
