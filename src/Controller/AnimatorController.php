@@ -36,6 +36,9 @@ class AnimatorController extends AbstractController
 
             $entityManager->persist($animator);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Animateur créée avec succès');
+
             return $this->redirectToRoute('animator');
         }
         return $this->render('animator/create.html.twig', ['form_view'=>$form_view]);

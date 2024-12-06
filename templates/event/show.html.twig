@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h2 class="text-primary h2">{{ event.title }}</h2>
+
+        <p>{{ event.description }}</p>
+
+        <a href="{{ path('event') }}" class="btn btn-primary">Retour aux évènements</a>
+
+    </section>
+
+{% endblock %}

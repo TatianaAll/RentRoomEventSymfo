@@ -29,17 +29,18 @@
                         <a class="nav-link" href="{{ path('event') }}">Les évènements</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('etablishment') }}">Les établissements</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('animator') }}">Les animateurs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('tag') }}">Les Tags des salles</a>
+                        <a class="nav-link" href="{{ path('tag') }}">Les tags des salles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('category') }}">Les catégories d'évènements</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('etablishment') }}">Les établissements</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('room') }}">Les salles</a>
                     </li>
@@ -49,6 +50,15 @@
         </div>
     </nav>
 </header>
+
+<main>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+</main>
+
 {% block body %}{% endblock %}
 </body>
 </html>
