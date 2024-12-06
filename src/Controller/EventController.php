@@ -44,6 +44,8 @@ class EventController extends AbstractController
         if ($form->isSubmitted()) {
             $entityManager->persist($event);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Evènement bien créé ;)');
             return $this->redirectToRoute('event');
         }
         return $this->render('event/create.html.twig', ['form_view' => $form_view]);
@@ -69,6 +71,9 @@ class EventController extends AbstractController
             $entityManager->persist($eventToUpdate);
 
             $entityManager->flush();
+
+            $this->addFlash('success', 'Evènement mis à jour correctement ;)');
+
             return $this->redirectToRoute('event');
         }
         return $this->render('event/update.html.twig', ['form_view' => $formView,

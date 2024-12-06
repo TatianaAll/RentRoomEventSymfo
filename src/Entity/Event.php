@@ -26,6 +26,15 @@ class Event
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_time = null;
 
+    #[ORM\ManyToOne(targetEntity: Animator::class, inversedBy: "events")]
+    private ?Animator $animator = null;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "events")]
+    private ?Category $category = null;
+
+    #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: "events")]
+    private ?Room $room = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +84,38 @@ class Event
     public function setEndTime(\DateTimeInterface $end_time): static
     {
         $this->end_time = $end_time;
+
+        return $this;
+    }
+
+    public function getAnimator() : ?Animator
+    {
+        return $this->animator;
+    }
+    public function setAnimator(Animator $animator) : static
+    {
+        $this->animator = $animator;
+
+        return $this;
+    }
+    public function getCategory() : ?Category
+    {
+        return $this->category;
+    }
+    public function setCategory(Category $category) : static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getRoom() : ?Room
+    {
+        return $this->room;
+    }
+    public function setRoom(Room $room) : static
+    {
+        $this->room = $room;
 
         return $this;
     }

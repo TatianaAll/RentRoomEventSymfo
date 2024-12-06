@@ -27,6 +27,9 @@ class Room
     #[ORM\JoinTable(name:'room_tag')]
     private Collection $tags;
 
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Event::class)]
+    private ?Collection $events = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,5 +77,10 @@ class Room
     {
         $this->tags = $tags;
         return $this;
+    }
+
+    public function getEvents () : Collection
+    {
+        return $this->events;
     }
 }

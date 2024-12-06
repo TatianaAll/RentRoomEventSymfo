@@ -7,10 +7,12 @@
     <section class="container">
 
         <h2 class="text-primary h2">{{ event.title }}</h2>
+        <p>Début : {{ event.startTime.format('d/m/Y H:i') }}</p>
 
         <p>{{ event.description }}</p>
 
-        <a href="{{ path('event') }}" class="btn btn-primary">Retour aux évènements</a>
+        <a href="{{ path('event_update', {id: event.id}) }}" class="btn btn-warning mt-3">Mettre à jour</a>
+        <a href="{{ path('event') }}" class="btn btn-primary mt-3">Retour aux évènements</a>
 
     </section>
 
