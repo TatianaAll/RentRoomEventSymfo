@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etablissement "{{ etablishment.name }}" {% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h2 class="text-primary h2">L'établissement "{{ etablishment.name }}" </h2>
+
+        <p>Cet établissement est à {{ etablishment.address }}</p>
+        <p>{{ etablishment.description }}</p>
+
+    </section>
+    <section class="container">
+        <h2 class="text-primary h2">Cet établissement possède le(s) salle(s)</h2>
+
+        <div class="d-flex justify-content-around">
+            {% for room in etablishment.rooms %}
+                <div class="card mt-3 mr-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ room.name }}</h3>
+                        <p class="card-text">Cette salle à une capacité de {{ room.capacity }} personnes</p>
+
+                        <a href="{{ path('room_show', {id: room.id}) }}" class="card-link">Voir
+                            la salle</a>
+                        <a href="{{ path('room_update', {id: room.id}) }}" class="card-link">Mettre à
+                            jour</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+        <a href="{{ path('etablishment') }}" class="btn btn-primary">Retour aux établissement</a>
+
+
+
+{% endblock %}

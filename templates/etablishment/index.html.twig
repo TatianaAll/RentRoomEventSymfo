@@ -6,14 +6,27 @@
 
     <section class="container">
         <h2 class="text-primary h2">Liste des établissement</h2>
-        <ul>
+        <div class="d-flex justify-content-around">
             {% for etablishment in etablishments %}
-                <li>{{ etablishment.name }}, au {{ etablishment.address }}</li>
+                <div class="card mt-3 mr-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ etablishment.name }}</h3>
+                        <p class="card-text">Situé à {{ etablishment.address }}</p>
+                        {% for room in etablishment.rooms %}
+                            <p>{{ room.name }}</p>
+                        {% endfor %}
+                        <a href="{{ path('etablishment_show', {id: etablishment.id}) }}" class="card-link">Voir
+                            l'établissement</a>
+                        <a href="{{ path('etablishment_update', {id: etablishment.id}) }}" class="card-link">Mettre à
+                            jour</a>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
 
         <a href="{{ path('etablishment_create') }}" class="btn btn-primary">Ajouter un nouvel établissement</a>
     </section>
+
 
 {% endblock %}
 

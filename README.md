@@ -35,7 +35,7 @@ Ce projet est une application web pour gérer des salles, des établissements, d
 ## Modélisation des entités principales
 
 ### **1. Establishment**
-- **Table :** `establishment`
+- **Table :** `etablishment`
 - Représente un établissement contenant des salles.
 - **Champs :**
     - `id` : Identifiant unique.
@@ -50,7 +50,7 @@ Ce projet est une application web pour gérer des salles, des établissements, d
     - `id` : Identifiant unique.
     - `name` : Nom de la salle.
     - `capacity` : Capacité de la salle.
-    - `establishment_id` : Lien vers un établissement.
+    - `etablishment_id` : Lien vers un établissement.
 
 ### **3. Category**
 - **Table :** `category`

@@ -27,7 +27,10 @@ class RoomController extends AbstractController
     public function showRoom(int $id, RoomRepository $roomRepository): Response
     {
         $room = $roomRepository->find($id);
-        return $this->render('room/show.html.twig', ['room'=>$room]);
+
+        $etablishment = $room->getEtablishment();
+
+        return $this->render('room/show.html.twig', ['room'=>$room, 'etablishment'=> $etablishment]);
     }
 
     #[Route(path:'/room/create', name: 'room_create')]
@@ -64,12 +67,13 @@ class RoomController extends AbstractController
         $form = $this->createForm(RoomType::class, $roomToUpdate);
         $formView=$form->createView();
         $form->handleRequest($request);
-
         if($form->isSubmitted()) {
             $entityManager->persist($roomToUpdate);
+
             $entityManager->flush();
             return $this->redirectToRoute('room');
         }
         return $this->render('room/update.html.twig', ['form_view'=>$formView, 'room'=>$roomToUpdate]);
     }
+
 }

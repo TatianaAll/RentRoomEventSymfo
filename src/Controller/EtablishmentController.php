@@ -23,6 +23,16 @@ class EtablishmentController extends AbstractController
         ]);
     }
 
+    #[Route('/etablishment/show/{id}', name: 'etablishment_show', requirements: ['id' =>'\d+'])]
+    public function showEtablishment(int $id, EtablishmentRepository $etablishmentRepository): Response
+    {
+        $etablishment = $etablishmentRepository->find($id);
+
+        return $this->render('etablishment/show.html.twig', [
+            'etablishment' => $etablishment,
+        ]);
+    }
+
     #[Route('/etablishment/create', name: 'etablishment_create')]
     public function createEtablishment(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -39,5 +49,31 @@ class EtablishmentController extends AbstractController
         }
 
         return $this->render('etablishment/create.html.twig', ['form_view'=>$form_view]);
+    }
+
+    #[Route('/etablishment/update/{id}', name: 'etablishment_update', requirements: ['id'=>'\d+'])]
+    public function updateEtablishment(int $id,
+                                       Request $request,
+                                       EntityManagerInterface $entityManager,
+                                       EtablishmentRepository $etablishmentRepository): Response
+    {
+        $etablishmentToUpdate = $etablishmentRepository->find($id);
+
+        if (!$etablishmentToUpdate) {
+            return $this->redirectToRoute('not_found');
+        }
+
+        $form = $this->createForm(EtablishmentType::class, $etablishmentToUpdate);
+        $form_view = $form->createView();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() ){
+            $entityManager->persist($etablishmentToUpdate);
+            $entityManager->flush();
+            return($this->redirectToRoute('etablishment'));
+        }
+
+        return $this->render('etablishment/update.html.twig', ['form_view'=>$form_view, 'etablishment'=>$etablishmentToUpdate]);
     }
 }

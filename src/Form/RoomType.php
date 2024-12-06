@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Etablishment;
 use App\Entity\Tag;
 use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,6 +27,15 @@ class RoomType extends AbstractType
                 'label' => 'Capacité de la salle',
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label']
+            ])
+
+            ->add('etablishment', EntityType::class, [
+                'class' => Etablishment::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'attr' => ['class' => 'form-select'],
+                'label' => 'Etablissement propriétaire',
+                'label_attr' => ['class' => 'form-label'],
             ])
 
             ->add('tags', EntityType::class, [

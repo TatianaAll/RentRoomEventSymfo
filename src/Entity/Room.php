@@ -60,7 +60,7 @@ class Room
     {
         return $this->etablishment;
     }
-    public function setEtablisment(?Etablishment $etablishment): static
+    public function setEtablishment(?Etablishment $etablishment): static
     {
         $this->etablishment = $etablishment;
         return $this;
