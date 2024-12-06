@@ -7,22 +7,26 @@
     <section class="container">
         <h2 class="text-primary h2">Les évènements</h2>
 
-        {% for event in events %}
-            <div class="card mt-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h3 class="card-title">{{ event.title }}</h3>
-                    <p class="card-text">{{ event.description }}</p>
-                    <p class="card-text">Début : {{ event.startTime.format('d/m/Y H:i') }}</p>
-                    <p class="card-text">Fin : {{ event.endTime.format('d/m/Y H:i') }}</p>
+        <div class="d-flex justify-content-around">
+            {% for event in events %}
+                <div class="card mt-3" style="width: 20rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ event.title }}</h3>
+                        <p class="card-text">{{ event.description }}</p>
+                        <p class="card-text">Début : {{ event.startTime.format('d/m/Y H:i') }}</p>
+                        <p class="card-text">Fin : {{ event.endTime.format('d/m/Y H:i') }}</p>
+                        <p class="card-text">Animateur de l'évènement : {{ event.animator.fullname }}</p>
+                        <p class="card-text">Salle : {{ event.room.name }}</p>
+                        <p class="card-text">Catégorie : {{ event.category.name }}</p>
 
-                    <a href="{{ path('event_show', {id: event.id}) }}" class="card-link">Voir l'évènement</a>
-                    <a href="{{ path('event_update', {id: event.id}) }}" class="card-link">Mettre à jour</a>
+                        <a href="{{ path('event_show', {id: event.id}) }}" class="card-link">Voir l'évènement</a>
+                        <a href="{{ path('event_update', {id: event.id}) }}" class="card-link">Mettre à jour</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
-
-        <a href="{{ path('event_create') }}" class="btn btn-primary">Créer un nouvel évènement</a>
+        <a href="{{ path('event_create') }}" class="btn btn-primary mt-3">Créer un nouvel évènement</a>
     </section>
 
 {% endblock %}

@@ -30,6 +30,9 @@ class Room
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Event::class)]
     private ?Collection $events = null;
 
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Image::class)]
+    private ?Collection $images = null;
+
     public function getId(): ?int
     {
         return $this->id;

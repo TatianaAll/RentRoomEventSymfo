@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Animator;
+use App\Entity\Category;
 use App\Entity\Event;
+use App\Entity\Room;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,6 +41,30 @@ class EventType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
                 'widget' => 'single_text',
+            ])
+            ->add('animator', EntityType::class, [
+                'class' => Animator::class,
+                'choice_label' => 'fullname',
+                'multiple' => false,
+                'attr' => ['class' => 'form-select'],
+                'label' => 'animateur de l\'évènement',
+                'label_attr' => ['class' => 'form-label'],
+            ])
+            ->add('room', EntityType::class, [
+                'class' => Room::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'attr' => ['class' => 'form-select'],
+                'label' => 'la salle',
+                'label_attr' => ['class' => 'form-label'],
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'attr' => ['class' => 'form-select'],
+                'label' => 'genre d\'évènement',
+                'label_attr' => ['class' => 'form-label'],
             ])
             ->add('Enregistrer', SubmitType::class, options :
                 ['attr' => ['class' => 'btn btn-success mt-3'],

@@ -5,26 +5,42 @@
 {% block body %}
 
     <section class="container">
+
         <h2 class="text-primary h2">Liste des établissement</h2>
-        <div class="d-flex justify-content-around">
+
+        <div class="d-flex justify-content-around flex-wrap">
+
             {% for etablishment in etablishments %}
                 <div class="card mt-3 mr-3" style="width: 18rem;">
                     <div class="card-body">
                         <h3 class="card-title">{{ etablishment.name }}</h3>
                         <p class="card-text">Situé à {{ etablishment.address }}</p>
+
+                        <ul class="list-group list-group-flush text-secondary">Les salles
                         {% for room in etablishment.rooms %}
-                            <p>{{ room.name }}</p>
+                            {% if room is null %}
+                                <li>Aucune salle pour le moment</li>
+                            {% else %}
+                                <li class="list-group-item text-secondary">
+                                    <a href="{{ path('room_show', {id: room.id}) }}" class="btn btn-primary btn-sm">{{ room.name }}</a>
+                                </li>
+                            {% endif %}
                         {% endfor %}
-                        <a href="{{ path('etablishment_show', {id: etablishment.id}) }}" class="card-link">Voir
+                        </ul>
+
+                        <a href="{{ path('etablishment_show', {id: etablishment.id}) }}" class="card-link link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Voir
                             l'établissement</a>
-                        <a href="{{ path('etablishment_update', {id: etablishment.id}) }}" class="card-link">Mettre à
+
+                        <a href="{{ path('etablishment_update', {id: etablishment.id}) }}" class="card-link link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mettre à
                             jour</a>
+
+                        <a href="{{ path('room_create') }}" class="card-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Ajouter une salle</a>
                     </div>
                 </div>
             {% endfor %}
         </div>
 
-        <a href="{{ path('etablishment_create') }}" class="btn btn-primary">Ajouter un nouvel établissement</a>
+        <a href="{{ path('etablishment_create') }}" class="btn btn-primary mt-4">Ajouter un nouvel établissement</a>
     </section>
 
 

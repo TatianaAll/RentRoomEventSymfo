@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etablishment;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
@@ -28,9 +29,9 @@ class RoomController extends AbstractController
     {
         $room = $roomRepository->find($id);
 
-        $etablishment = $room->getEtablishment();
+        $establishment = $room->getEtablishment();
 
-        return $this->render('room/show.html.twig', ['room'=>$room, 'etablishment'=> $etablishment]);
+        return $this->render('room/show.html.twig', ['room'=>$room, 'etablishment'=> $establishment]);
     }
 
     #[Route(path:'/room/create', name: 'room_create')]
