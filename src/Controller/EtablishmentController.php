@@ -76,4 +76,25 @@ class EtablishmentController extends AbstractController
 
         return $this->render('etablishment/update.html.twig', ['form_view'=>$form_view, 'etablishment'=>$etablishmentToUpdate]);
     }
+
+    #[Route(path: 'etablishment/delete/{id}',name: 'etablishment_delete', requirements: ['id'=>'\d+'])]
+    public function deleteEstablishment(int $id,
+                                        EtablishmentRepository $etablishmentRepository,
+                                        EntityManagerInterface $entityManager): Response
+    {
+        $etablishmentToDelete = $etablishmentRepository->find($id);
+        $roomsToDelete = $etablishmentToDelete->getRooms();
+        foreach($roomsToDelete as $room) {
+            $imagesToDelete = $room->getImages();
+            foreach ($imagesToDelete as $image)
+            {
+                //dd($this->getParameter('uploads_directory').'/'.$image->getFileName());
+                @unlink($this->getParameter('uploads_directory').'/'.$image->getFileName());
+            }
+        }
+        $entityManager->remove($etablishmentToDelete);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('etablishment');
+    }
 }

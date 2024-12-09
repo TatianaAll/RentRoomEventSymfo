@@ -27,12 +27,15 @@ class Event
     private ?\DateTimeInterface $end_time = null;
 
     #[ORM\ManyToOne(targetEntity: Animator::class, inversedBy: "events")]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Animator $animator = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "events")]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: "events")]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Room $room = null;
 
     public function getId(): ?int

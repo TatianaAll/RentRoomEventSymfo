@@ -80,7 +80,7 @@ class RoomController extends AbstractController
 
             $entityManager->persist($room);
             $entityManager->flush();
-            return $this->redirectToRoute('room');
+            return $this->redirectToRoute('etablishment');
         }
 
         return $this->render('room/create.html.twig', ['form_view' => $form_view]);

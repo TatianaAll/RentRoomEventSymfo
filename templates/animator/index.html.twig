@@ -4,15 +4,32 @@
 
 {% block body %}
 
-<section class="container">
-    <h2 class="text-primary h2">Liste des animateurs</h2>
-    <ul>
-        {% for animator in animators %}
-        <li>Animateur : {{ animator.firstname }} {{ animator.lastname }}</li>
-        {% endfor %}
-    </ul>
+    <section class="container">
+        <h2 class="text-primary h2">Liste des animateurs</h2>
 
-        <a href="{{ path('animator_create') }}" class="btn btn-primary" >Ajouter un nouvel animateur</a>
+        <h2 class="text-primary h2">Liste des établissements</h2>
+
+        <div class="d-flex justify-content-around flex-wrap">
+
+            {% for animator in animators %}
+                <div class="card mt-3 mr-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ animator.firstname }} {{ animator.lastname }}</h3>
+
+                        <a href="{{ path('animator_update', {id: animator.id}) }}"
+                           class="card-link link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mettre
+                            à
+                            jour</a>
+
+                        <a href="{{ path('animator_delete', {id: animator.id}) }}"
+                           class="card-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <a href="{{ path('animator_create') }}" class="btn btn-primary">Ajouter un nouvel animateur</a>
     </section>
 
 {% endblock %}

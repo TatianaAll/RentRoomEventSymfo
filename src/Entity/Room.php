@@ -21,6 +21,7 @@ class Room
     private ?int $capacity = null;
 
     #[ORM\ManyToOne(targetEntity: Etablishment::class, inversedBy: 'rooms')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Etablishment $etablishment = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class)]

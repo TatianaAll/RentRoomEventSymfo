@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification de {{ animator.firstname}} {{ animator.lastname}} {% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h2 class="text-primary h2">Modification de l'animateur</h2>
+        {{ form_start(form_view) }}
+        {{ form_widget(form_view) }}
+        {{ form_end(form_view) }}
+    </section>
+    <section class="container mt-3">
+        <a href="{{ path('room') }}" class="btn btn-primary">Retourner aux animateurs</a>
+    </section>
+
+{% endblock %}
