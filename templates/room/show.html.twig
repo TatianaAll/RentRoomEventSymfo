@@ -18,6 +18,7 @@
                 <p class="card-text">Elle appartient à l'établissement : {{ etablishment.name }}, à {{ etablishment.address }}</p>
                 <p class="card-text">{{ etablishment.description }}</p>
                 <a href="{{ path('room_update', {id: room.id}) }}" class="btn btn-warning">Mettre à jour</a>
+                <a href="{{ path('room_delete', {id: room.id}) }}" class="btn btn-danger">Supprimer</a>
                 <a href="{{ path('etablishment_show', {id: room.etablishment.id}) }}" class="btn btn-primary">Voir l'établissement</a>
             </div>
         </div>

@@ -17,6 +17,7 @@ class Image
     private ?string $path = null;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'images')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Room $room = null;
 
     public function getId(): ?int
@@ -34,6 +35,12 @@ class Image
         $this->path = $path;
 
         return $this;
+    }
+
+    public function getFileName(): string
+    {
+        $fileName = explode('/', $this->getPath());
+        return end($fileName);
     }
 
     public function getRoom(): ?Room

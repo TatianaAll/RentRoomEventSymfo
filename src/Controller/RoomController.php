@@ -126,4 +126,29 @@ class RoomController extends AbstractController
         return $this->render('room/update.html.twig', ['form_view' => $formView, 'room' => $roomToUpdate]);
     }
 
+    #[Route(path: 'room/delete/{id}', name: 'room_delete', requirements: ['id'=>'\d+'])]
+    public function deleteRoom(int $id,
+                               RoomRepository $roomRepository,
+                               Request $request,
+                               EntityManagerInterface $entityManager): Response
+    {
+        //je détecte la salle a supprimer
+        $roomToDelete = $roomRepository->find($id);
+        $imagesToDelete = $roomToDelete->getImages();
+
+        //il faut que je supprime les images qui sont liées à la salle
+        foreach ($imagesToDelete as $image)
+        {
+            //dd($this->getParameter('uploads_directory').'/'.$image->getFileName());
+            @unlink($this->getParameter('uploads_directory').'/'.$image->getFileName());
+        }
+
+        //je la retire
+        $entityManager->remove($roomToDelete);
+        $entityManager->flush();
+
+        $this->addFlash('success','Salle supprimée avec succès');
+        return $this->redirectToRoute('etablishment');
+    }
+
 }
