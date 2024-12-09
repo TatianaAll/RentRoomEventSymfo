@@ -8,9 +8,19 @@
 
         <h2 class="text-primary h2">Salle "{{ room.name }}" </h2>
 
-        <p>Elle peut accueillir jusqu'à {{ room.capacity }}</p>
-        <p>Elle appartient à l'établissement : {{ etablishment.name }}, à {{ etablishment.address }}</p>
-        <p>{{ etablishment.description }}</p>
+        <div class="card" style="width: 30rem;">
+            {% for image in room.images %}
+                <img src="{{ asset(image.path) }}" class="card-img-top" width="60" alt="{{ room.name }}">
+            {% endfor %}
+            <div class="card-body">
+                <h5 class="card-title">{{ room.name }}</h5>
+                <p class="card-text">Elle peut accueillir jusqu'à {{ room.capacity }} personnes</p>
+                <p class="card-text">Elle appartient à l'établissement : {{ etablishment.name }}, à {{ etablishment.address }}</p>
+                <p class="card-text">{{ etablishment.description }}</p>
+                <a href="{{ path('room_update', {id: room.id}) }}" class="btn btn-warning">Mettre à jour</a>
+                <a href="{{ path('etablishment_show', {id: room.etablishment.id}) }}" class="btn btn-primary">Voir l'établissement</a>
+            </div>
+        </div>
 
         <h3>Les tags liés à cette salles sont : </h3>
         <ul>
@@ -19,7 +29,9 @@
             {% endfor %}
         </ul>
 
-        <a href="{{ path('room') }}" class="btn btn-primary">Retour aux salles</a>
+
+
+        <a href="{{ path('etablishment') }}" class="btn btn-primary">Retour aux établissements</a>
 
     </section>
 

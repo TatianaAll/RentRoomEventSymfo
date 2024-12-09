@@ -35,4 +35,15 @@ class Image
 
         return $this;
     }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+    public function setRoom(Room $room) : static
+    {
+        $this->room = $room;
+
+        return $this;
+    }
 }

@@ -6,6 +6,7 @@ use App\Entity\Etablishment;
 use App\Entity\Tag;
 use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
@@ -44,6 +45,22 @@ class RoomType extends AbstractType
                 'multiple' => true,
                 'attr' => ['class' => 'form-select'],
                 'label' => 'Tags',
+                'label_attr' => ['class' => 'form-label'],
+            ])
+
+            //j'ajoute une image à rajouter depuis mon entité image
+            ->add('images', FileType::class, [
+                //unmapped ==> When editing an object via a form,
+                // all form fields are considered properties of the object.
+                // Any fields on the form that do not exist on the object will
+                // cause an exception to be thrown.
+                'mapped' => false,
+                //plusieurs images ajoutée is ok
+                'multiple' => true,
+                //pas obligatoire
+                'required' => false,
+                'label' => 'Images',
+                'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
             ])
 

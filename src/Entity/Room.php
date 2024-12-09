@@ -86,4 +86,8 @@ class Room
     {
         return $this->events;
     }
+    public function getImages () : Collection
+    {
+        return $this->images;
+    }
 }
