@@ -6,15 +6,30 @@
 
     <section class="container">
         <h2 class="text-primary h2">Les catégories d'évènements proposés</h2>
-        <ul>
-            {% for category in categories %}
-                <li class="fs-5 fw-bold">{{ category.name }}
-                    <span class="fs-6 fw-normal"> {{ category.description }}</span>
-                </li>
-            {% endfor %}
-        </ul>
 
-        <a href="{{ path('category_create') }}" class="btn btn-primary" >Ajouter une nouvelle catégorie</a>
+        {% for category in categories %}
+            <div class="card mt-3 mr-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h3 class="card-title">{{ category.name }}</h3>
+                    <p class="card-text">Situé à {{ category.description }}</p>
+
+                    <a href="{{ path('category_show', {id: category.id}) }}"
+                       class="card-link link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Voir
+                        l'établissement</a>
+
+                    <a href="{{ path('category_update', {id: category.id}) }}"
+                       class="card-link link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mettre
+                        à
+                        jour</a>
+
+                    <a href="{{ path('category_delete', {id: category.id}) }}"
+                       class="card-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Supprimer</a>
+
+                </div>
+            </div>
+        {% endfor %}
+
+        <a href="{{ path('category_create') }}" class="btn btn-primary mt-4">Ajouter une catégorie</a>
     </section>
 
 {% endblock %}

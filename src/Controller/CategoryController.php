@@ -23,6 +23,29 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    #[Route(path:'/category/update/{id}', name: 'category_update', requirements: ['id'=>'\d+'])]
+    public function updateCategory(int $id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        $categoryToUpdate = $categoryRepository->find($id);
+
+        if (!$categoryToUpdate) {
+            return $this->redirectToRoute('not_found');
+        }
+
+        $form = $this->createForm(categoryType::class, $categoryToUpdate);
+        $form_view = $form->createView();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() ){
+            $entityManager->persist($categoryToUpdate);
+            $entityManager->flush();
+            return($this->redirectToRoute('category'));
+        }
+
+        return $this->render('category/update.html.twig', ['form_view'=>$form_view, 'category'=>$categoryToUpdate]);
+    }
+
     #[Route(path: '/category/create', name: 'category_create')]
     public function createCategory(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -39,5 +62,17 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category');
         }
         return $this->render('category/create.html.twig', ['form_view'=>$form_view]);
+    }
+
+
+    #[Route(path:'/category/delete/{id}', name: 'category_delete', requirements: ['id'=>'\d+'])]
+    public function deleteCategory(int $id, CategoryRepository $categoryRepository,EntityManagerInterface $entityManager )
+    {
+        $categoryToDelete = $categoryRepository->find($id);
+
+        $entityManager->remove($categoryToDelete);
+        $entityManager->flush();
+        $this->addFlash('success', 'catégorie supprimée avec succès');
+        return $this->redirectToRoute('category');
     }
 }
